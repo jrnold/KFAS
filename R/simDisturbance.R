@@ -1,6 +1,6 @@
 simDisturbance <- function(object, nsim = 1, antithetics = FALSE) {
     
-    if (object$H.type == "Untransformed") 
+    if (object$H_type == "Untransformed") 
         object <- transformSSM(object, type = "ldl")
     
     tv <- array(0, dim = 5)
@@ -14,7 +14,7 @@ simDisturbance <- function(object, nsim = 1, antithetics = FALSE) {
     ymiss <- array(is.na(object$y),dim=c(object$n,object$p))
     storage.mode(ymiss)<-"integer"
     
-    if (object$H.type == "Augmented") {        
+    if (object$H_type == "Augmented") {        
         
         etaplus <- array(0, c(object$r, object$n, nsim))
         aplus1 <- array(0, dim = c(object$m, nsim))
