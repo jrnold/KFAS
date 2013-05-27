@@ -13,10 +13,10 @@ simObs <- function(object, nsim = 1, antithetics = FALSE) {
     ymiss <- array(is.na(object$y),dim=c(object$n,object$p))
     storage.mode(ymiss)<-"integer"    
     
-    if (object$H_type == "LDL decomposed") 
+    if (identical(object$H_type, "LDL decomposed"))
         warning("Because model is already LDL-transformed, simulated series are are also in transformed scale.")
-    
-    if (object$H_type != "Augmented") 
+
+    if (! identical(object$H_type, "Augmented"))
         object <- transformSSM(object, type = "augment")
     
     

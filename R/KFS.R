@@ -91,7 +91,7 @@ KFS <- function(object, smoothing = c("state", "disturbance", "both","none"), si
             out$model <-object
             out$KFS.transform<-"none"
             
-            if (object$H_type == "Untransformed") {       
+            if (identical(object$H_type, "Untransformed")) {       
                 object <- transformSSM(object, type = transform)
                 out$KFS.transform<-object$H_type
             }

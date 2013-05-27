@@ -47,7 +47,7 @@ logLik.SSModel <- function(object, nsim = 0, antithetics = TRUE, taylor = TRUE, 
                     object$n, lik = lik, object$tolF, as.integer(sum(object$P1inf)))
             
         } else {
-            if (object$H_type == "Untransformed") 
+            if (identical(object$H_type, "Untransformed"))
                 object <- transformSSM(object, type = "ldl")
             
             
@@ -57,7 +57,7 @@ logLik.SSModel <- function(object, nsim = 0, antithetics = TRUE, taylor = TRUE, 
             tv[3] <- dim(object$T)[3] > 1
             tv[4] <- dim(object$R)[3] > 1
             tv[5] <- dim(object$Q)[3] > 1
-            if (object$H_type != "Augmented") {
+            if (! identical(object$H_type, "Augmented")) {
                 kfout <- .Fortran("gloglikd", PACKAGE = "KFAS", NAOK = TRUE, array(object$y,dim=c(object$n,object$p)), 
                         ymiss, as.integer(tv), object$Z, object$H, object$T, object$R, 
                         object$Q, object$a1, object$P1, object$P1inf, object$p, 

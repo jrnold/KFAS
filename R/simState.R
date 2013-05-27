@@ -1,6 +1,6 @@
 simState <- function(object, nsim = 1, antithetics = FALSE) {
     
-    if (object$H_type == "Untransformed") 
+    if (identical(object$H_type, "Untransformed"))
         object <- transformSSM(object = object, type = "ldl")
     
     tv <- array(0, dim = 5)
